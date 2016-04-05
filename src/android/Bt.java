@@ -11,11 +11,10 @@ import com.RT_Printer.BluetoothPrinter.BLUETOOTH.BluetoothPrintDriver;
 public class Bt extends CordovaPlugin {
  private JSONObject deviceToJSON(BluetoothDevice device) throws JSONException {
         JSONObject json = new JSONObject();
-        if (BluetoothPrintDriver.OpenPrinter(device.getAddress()))
-        {
+        
 	  json.put("id", device.getAddress());
-	  BluetoothPrintDriver.close();
-	}        
+	 
+	       
         return json;
     }
 private BluetoothAdapter bluetoothAdapter;
@@ -72,7 +71,11 @@ private BluetoothAdapter bluetoothAdapter;
 	    Set<BluetoothDevice> bondedDevices = bluetoothAdapter.getBondedDevices();
 
 	    for (BluetoothDevice device : bondedDevices) {
+		if (BluetoothPrintDriver.OpenPrinter(device.getAddress()))
+		{
 		deviceList.put(deviceToJSON(device));
+		 BluetoothPrintDriver.close();
+		}
         }
         callbackContext.success(deviceList);
             return true;
