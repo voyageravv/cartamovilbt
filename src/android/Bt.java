@@ -13,12 +13,12 @@ public class Bt extends CordovaPlugin {
         JSONObject json = new JSONObject();
         if (BluetoothPrintDriver.OpenPrinter(device.getAddress()))
         {
-	  json.put("available", true);
+	  json.put("isConnected", true);
 	  BluetoothPrintDriver.close();
 	} 
 	else
 	{
-	  json.put("available", false);
+	  json.put("isConnected", false);
 
 	}
 	json.put("id", device.getAddress());
