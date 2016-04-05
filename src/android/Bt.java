@@ -13,9 +13,15 @@ public class Bt extends CordovaPlugin {
         JSONObject json = new JSONObject();
         if (BluetoothPrintDriver.OpenPrinter(device.getAddress()))
         {
-	  json.put("id", device.getAddress());
+	  json.put("available", true);
 	  BluetoothPrintDriver.close();
-	}        
+	} 
+	else
+	{
+	  json.put("available", false);
+
+	}
+	json.put("id", device.getAddress());
         return json;
     }
 private BluetoothAdapter bluetoothAdapter;
@@ -72,9 +78,7 @@ private BluetoothAdapter bluetoothAdapter;
 	    Set<BluetoothDevice> bondedDevices = bluetoothAdapter.getBondedDevices();
 
 	    for (BluetoothDevice device : bondedDevices) {
-	        JSONObject dl = deviceToJSON(device);
-		 if (dl.getJSONArray("null_object_1").length() !== 0)
-		    deviceList.put(dl);
+		    deviceList.put(deviceToJSON(device));
         }
         callbackContext.success(deviceList);
             return true;
