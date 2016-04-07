@@ -73,9 +73,11 @@ Example list passed to success callback. See BluetoothDevice and BluetoothClass#
 
 [{
     "id": "10:BF:48:CB:00:00",
+    "isConnected": true,
  
 }, {
     "id": "00:06:66:4D:00:00",
+    "isConnected": false,
 }]
 
 Parameters
